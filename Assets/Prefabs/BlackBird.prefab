@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8321650011772272680}
   - component: {fileID: 1811311293487898001}
   m_Layer: 0
-  m_Name: Bird
+  m_Name: BlackBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,9 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224c0b4de71de9a49b8ebfdf2d11480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  hSpeed: 2
+  vSpeed: 3
   rb: {fileID: 1811311293487898001}
-  speedIncrement: 0
+  scoreValue: 1
+  speedIncrement: 0.1
 --- !u!50 &1811311293487898001
 Rigidbody2D:
   serializedVersion: 4

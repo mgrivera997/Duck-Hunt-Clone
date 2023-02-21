@@ -942,6 +942,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8321650011772272680, guid: e6b9337ce084bae49bc79512a933ea64, type: 3}
+      propertyPath: vSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8321650011772272684, guid: e6b9337ce084bae49bc79512a933ea64, type: 3}
       propertyPath: m_Name
       value: Bird
@@ -956,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8321650011772272687, guid: e6b9337ce084bae49bc79512a933ea64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.73
       objectReference: {fileID: 0}
     - target: {fileID: 8321650011772272687, guid: e6b9337ce084bae49bc79512a933ea64, type: 3}
       propertyPath: m_LocalPosition.z
