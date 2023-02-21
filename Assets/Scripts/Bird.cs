@@ -9,12 +9,12 @@ public class Bird : MonoBehaviour
     public Rigidbody2D rb;
     public int scoreValue;
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
-        StartMove();
+        rb.velocity = new Vector2(rb.velocity.x, vSpeed);
+        HorizontalMove();
+
         StartCoroutine("Moving");
     }
 
@@ -35,22 +35,16 @@ public class Bird : MonoBehaviour
 
     public void VerticalMove() 
     {
-        float y = Random.Range(-1, 1);
-        if (rb.velocity.x == 0)y = Random.Range(0, 2) == 0 ? -1 : 1;
+        float y = Random.Range(-1.0f, 1.0f);
+        if (rb.velocity.x == 0.0f) y = Random.Range(0.0f, 2.0f) == 0.0f ? -1.0f : 1.0f;
         rb.velocity = new Vector2(rb.velocity.x, vSpeed * y);
     }
 
     public void HorizontalMove()
     {
-        float x = Random.Range(-1, 1);
-        if (rb.velocity.y == 0) x = Random.Range(0, 2) == 0 ? -1 : 1;
+        float x = Random.Range(-1.0f, 1.0f);
+        if (rb.velocity.y == 0.0f) x = Random.Range(0.0f, 2.0f) == 0.0f ? -1.0f : 1.0f;
         rb.velocity = new Vector2(hSpeed * x, rb.velocity.y);
-    }
-
-    public void StartMove() 
-    {
-        float x = Random.Range(0, 2) == 0 ? -1 : 1;
-        rb.velocity = new Vector2(hSpeed * x, vSpeed);
     }
 
     public virtual IEnumerator Moving() 
@@ -58,10 +52,9 @@ public class Bird : MonoBehaviour
         WaitForSeconds waitTime = new WaitForSeconds((float)2);
         while (true) 
         {
+            yield return waitTime;
             VerticalMove();
             HorizontalMove();
-            Debug.Log(rb.velocity);
-            yield return waitTime;
         }
     }
 }
