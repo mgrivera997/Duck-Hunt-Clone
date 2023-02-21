@@ -10,6 +10,6 @@ public class Crosshair : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
         transform.position = mousePos;
-        
     }
+
 }
