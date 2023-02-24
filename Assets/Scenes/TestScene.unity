@@ -523,11 +523,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoMaxCount: 3
   ammoCurCount: 3
-  birdMaxCount: 10
-  birdCurCount: 10
+  maxBirdsToSpawn: 10
+  totalBirdsToSpawn: 10
   maxBirdsAlive: 2
+  curBirdsAlive: 0
   score: 0
-  isOutOfAmmo: 1
+  perfectScore: 10000
+  isOutOfAmmo: 0
   areAllBirdsDead: 1
   birdTypesList:
   - {fileID: 8321650011772272684, guid: 1825dea7f43f89843a520e33ca7ecce1, type: 3}
@@ -535,6 +537,7 @@ MonoBehaviour:
   - {fileID: 8321650011772272684, guid: e6b9337ce084bae49bc79512a933ea64, type: 3}
   birdsList: []
   birdSpawnPos: {fileID: 1745606093}
+  birdsShot: 0
 --- !u!4 &1575133366
 Transform:
   m_ObjectHideFlags: 0

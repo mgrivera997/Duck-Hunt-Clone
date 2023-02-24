@@ -7,12 +7,14 @@ public class GameManager : MonoBehaviour
     public int ammoMaxCount = 3;
     public int ammoCurCount = 0;
 
-    public int birdMaxCount = 10;
-    public int birdCurCount = 10;
+    public int maxBirdsToSpawn = 10;
+    public int totalBirdsToSpawn = 10;
 
     public int maxBirdsAlive = 2;
+    public int curBirdsAlive;
 
     public int score = 0;
+    public int perfectScore = 10000;
 
     public bool isOutOfAmmo = true;
     public bool areAllBirdsDead = true;
@@ -21,22 +23,19 @@ public class GameManager : MonoBehaviour
     public List<GameObject> birdsList;
 
     public Transform birdSpawnPos;
+
+    public int birdsShot;
     public void Start()
     {
         SpawnBird();
     }
     public void Update()
     {
-       
-        if (Input.anyKeyDown)
+        if (areAllBirdsDead)
         {
-            Debug.Log("Spent 1 Ammo");
-            
-           
-                ammoCurCount -= 1;
+            SpawnBird();
         }
-
-        if (ammoCurCount == 0)
+        if (isOutOfAmmo)
         {
             DespawnBirds();
             SpawnBird();
@@ -44,11 +43,18 @@ public class GameManager : MonoBehaviour
     }
     public void OnBirdShot(Bird bird)
     {
-        birdCurCount -= 1;
         score += bird.scoreValue;
-
+        birdsShot++;
+        birdsList.Remove(bird.gameObject);
+        bird.KillSelf();
+        curBirdsAlive--;
+        if(curBirdsAlive == 0)
+        {
+            areAllBirdsDead = true;
+        }
         if (ammoCurCount == 0)
         {
+            isOutOfAmmo = true;
             DespawnBirds();
             SpawnBird();
         }
@@ -59,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (ammoCurCount == 0)
         {
+            isOutOfAmmo = true;
             DespawnBirds();
             SpawnBird();
         }
@@ -67,16 +74,32 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnBird()
     {
-        if (areAllBirdsDead || isOutOfAmmo)
+        if ((areAllBirdsDead || isOutOfAmmo) && totalBirdsToSpawn > 0)
         {
+            curBirdsAlive = maxBirdsAlive;
+            areAllBirdsDead = false;
             for (int i = 0; i < maxBirdsAlive; i++)
             {
+                totalBirdsToSpawn -= 1;
                 int rand = Random.Range(0, 2);
                 GameObject birdGameObject = Instantiate(birdTypesList[rand], birdSpawnPos);
+                birdGameObject.GetComponent<Bird>().gameManager = this;
                 birdsList.Add(birdGameObject);
             }
             isOutOfAmmo = false;
             ammoCurCount = ammoMaxCount;
+        }
+        else
+        {
+            //When all 10 birds have been spawned
+            totalBirdsToSpawn = 0;
+            if (birdsShot == 10)
+            {
+                score += perfectScore;
+                birdsShot = 0;
+                Debug.Log("Perfect");
+            }
+            Debug.Log("Next Round");
         }
     }
     public void DespawnBirds()

@@ -118,8 +118,8 @@ MonoBehaviour:
   hSpeed: 2
   vSpeed: 3
   rb: {fileID: 1811311293487898001}
-  scoreValue: 1
-  speedIncrement: 0.1
+  scoreValue: 500
+  gameManager: {fileID: 0}
 --- !u!50 &1811311293487898001
 Rigidbody2D:
   serializedVersion: 4
@@ -135,7 +135,7 @@ Rigidbody2D:
   m_Mass: 0.001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 8f7f14e6a57971e4d8770e2dea61ca7f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1

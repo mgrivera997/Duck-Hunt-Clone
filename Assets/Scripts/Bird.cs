@@ -8,7 +8,7 @@ public class Bird : MonoBehaviour
     public float vSpeed;
     public Rigidbody2D rb;
     public int scoreValue;
-
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Bird : MonoBehaviour
 
     public void OnMouseDown()
     {
-        KillSelf();
+        gameManager.OnBirdShot(this);
     }
 
     public void KillSelf() 
