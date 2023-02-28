@@ -22,15 +22,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> birdTypesList;
     public List<GameObject> birdsList;
 
-    public Transform birdSpawnPos;
+
 
     public int birdsShot;
+    public Collider2D boxCollider;
     public void Start()
     {
         SpawnBird();
     }
     public void Update()
     {
+
         if (areAllBirdsDead)
         {
             SpawnBird();
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
         birdsList.Remove(bird.gameObject);
         bird.KillSelf();
         curBirdsAlive--;
-        if(curBirdsAlive == 0)
+        if (curBirdsAlive == 0)
         {
             areAllBirdsDead = true;
         }
@@ -82,7 +84,8 @@ public class GameManager : MonoBehaviour
             {
                 totalBirdsToSpawn -= 1;
                 int rand = Random.Range(0, 2);
-                GameObject birdGameObject = Instantiate(birdTypesList[rand], birdSpawnPos);
+                GameObject birdGameObject = Instantiate(birdTypesList[rand]);
+                birdGameObject.transform.position = getRandomPointInBounds(boxCollider.bounds);
                 birdGameObject.GetComponent<Bird>().gameManager = this;
                 birdsList.Add(birdGameObject);
             }
@@ -110,5 +113,16 @@ public class GameManager : MonoBehaviour
             bird.GetComponent<Bird>().KillSelf();
             birdsList.Remove(bird);
         }
+    }
+
+    private Vector2 getRandomPointInBounds(Bounds bound)
+    {
+        float minX = bound.size.x * -0.5f;
+        float minY = bound.size.y * -0.5f;
+        float maxX = bound.size.x;
+        float maxY = bound.size.y;
+
+        return new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+
     }
 }
