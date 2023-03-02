@@ -8,6 +8,9 @@ public class Background : MonoBehaviour
 
     private void OnMouseDown()
     {
-        gameManager.OnMissShot();
+        if (gameManager != null)
+        {
+            gameManager.OnMissShot();
+        }
     }
 }
