@@ -20,7 +20,10 @@ public class Bird : MonoBehaviour
 
     public void OnMouseDown()
     {
-        gameManager.OnBirdShot(this);
+        if (gameManager != null) 
+        {
+            gameManager.OnBirdShot(this);
+        }
     }
 
     public void KillSelf() 
