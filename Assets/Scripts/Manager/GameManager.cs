@@ -26,6 +26,17 @@ public class GameManager : MonoBehaviour
 
     public int birdsShot;
     public Collider2D boxCollider;
+
+    public static GameManager gameManagerInstance { get; private set; }
+    public void Awake()
+    {
+        if (gameManagerInstance != null && gameManagerInstance != this)
+        {
+            Destroy(this);
+        }
+        else
+            gameManagerInstance = this;
+    }
     public void Start()
     {
         SpawnBird();
